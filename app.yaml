@@ -1,0 +1,57 @@
+application: wow-virtual-queue
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+#default_expiration: "30d"
+
+handlers:
+
+- url: /css/(.*\.css)
+  mime_type: text/css
+  static_files: css/\1
+  upload: css/(.*\.css)
+
+- url: /(.*\.html)
+  mime_type: text/html
+  static_files: static/\1
+  upload: static/(.*\.html)
+  expiration: "0m"
+
+- url: /(.*\.ico)
+  mime_type: image/x-icon
+  static_files: static/\1
+  upload: static/(.*\.ico)
+  expiration: "0m"
+
+- url: /js/(.*\.js)
+  mime_type: text/javascript
+  static_files: js/\1
+  upload: js/(.*\.js)
+
+# image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: static/\1
+  upload: static/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+# index files
+- url: /(.+)/
+  static_files: \1/index.html
+  upload: (.+)/index.html
+  expiration: "0m"
+
+- url: /(.+)
+  static_files: \1/index.html
+  upload: (.+)/index.html
+  expiration: "0m"
+
+# site root
+- url: /
+  static_files: index.html
+  upload: index.html
+  login:
+  expiration: "0m"
+
+
+
